@@ -5,17 +5,17 @@
   
 
   
-  <title>Lu</title>
+  <title>Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Lu">
+<meta property="og:title" content="Hexo">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Lu">
+<meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Lu">
+<meta name="twitter:title" content="Hexo">
   
-    <link rel="alternate" href="/atom.xml" title="Lu" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -34,7 +34,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Lu</a>
+        <a href="/" id="logo">Hexo</a>
       </h1>
       
     </div>
@@ -62,6 +62,47 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-跨域请求" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/07/跨域请求/" class="article-date">
+  <time datetime="2018-08-07T06:11:55.090Z" itemprop="datePublished">2018-08-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/08/07/跨域请求/">跨域请求</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>jsonp、hash、postMessage、WebSocket、CORS</p>
+        
+          <p class="article-more-link">
+            <a href="/2018/08/07/跨域请求/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/07/跨域请求/" data-id="cjkjb9vhb0004noper1xt57j5" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-正则表达式" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2018/08/06/正则表达式/" class="article-date">
@@ -84,7 +125,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。在很多文本编辑器里，正则表达式通常被用来检索、替换那些符合某个模式的文本。</p>
+        <p>使用单个字符串来描述、匹配一系列符合某个句法规则的字符串。常用于字符串查找、字符串替换、基于模式匹配从字符串中提取子字符串、表单验证等。正则表达式一般由3部分组成：普通字符、特殊字符（也称“元字符”）、修饰符。</p>
         
           <p class="article-more-link">
             <a href="/2018/08/06/正则表达式/#more">Read More</a>
@@ -93,7 +134,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/06/正则表达式/" data-id="cjkjat1ab000320pe048a8h5e" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/正则表达式/" data-id="cjkjb9vh60001nopeo899jpkb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -125,8 +166,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。</p>
-<p>在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于种种原因导致服务器还没有响应我们的请求，但是因为我们采用了异步执行方式，所有包含请求代码的函数中的剩余代码将继续执行。如果我们是将请求结果交由另外一个JS函数去处理的，那么，这个时候就好比两条线程同时执行一样。</p>
+        <p>在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个js函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的js函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。</p>
+<p>在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于种种原因导致服务器还没有响应我们的请求，但是因为我们采用了异步执行方式，所有包含请求代码的函数中的剩余代码将继续执行。如果我们是将请求结果交由另外一个js函数去处理的，那么，这个时候就好比两条线程同时执行一样。</p>
         
           <p class="article-more-link">
             <a href="/2018/08/06/异步调用/#more">Read More</a>
@@ -135,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/06/异步调用/" data-id="cjkjat1aa000220pebpe0afpp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/异步调用/" data-id="cjkjb9vh90002nopeagyysvaw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -167,7 +208,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="HTTP-介绍"><a href="#HTTP-介绍" class="headerlink" title="HTTP 介绍"></a>HTTP 介绍</h2><p>超文本传输协议（HyperText Transfer Protocol）是互联网上应用最为广泛的一种网络协议，是一个客户端终端（用户）和服务器端（网站）请求和应答的标准。</p>
+        <p>超文本传输协议（HyperText Transfer Protocol）是互联网上应用最为广泛的一种网络协议，是一个客户端终端（用户）和服务器端（网站）请求和应答的标准。</p>
         
           <p class="article-more-link">
             <a href="/2018/08/06/HTTP协议/#more">Read More</a>
@@ -176,7 +217,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/06/HTTP协议/" data-id="cjkjat1a1000020peuzsq2ezc" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/HTTP协议/" data-id="cjkjb9vha0003nopei4664mac" class="article-share-link">Share</a>
       
       
     </footer>
@@ -208,8 +249,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h2><p>transition允许css的属性值在一定的时间区间内平滑地过渡，语法如下：</p>
-<p><code>transition：transition-property transition-duration transition-timing-function transition-delay ...</code></p>
+        <p>transition、transform、animation</p>
         
           <p class="article-more-link">
             <a href="/2018/08/06/CSS3动画/#more">Read More</a>
@@ -218,7 +258,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/06/CSS3动画/" data-id="cjkjat1a7000120pex54fn6h4" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/CSS3动画/" data-id="cjkjb9vh10000nope846gyqrb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -257,6 +297,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/07/跨域请求/">跨域请求</a>
+          </li>
         
           <li>
             <a href="/2018/08/06/正则表达式/">正则表达式</a>

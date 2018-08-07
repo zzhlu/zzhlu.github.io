@@ -5,23 +5,23 @@
   
 
   
-  <title>异步调用 | Lu</title>
+  <title>异步调用 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
+  <meta name="description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个js函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的js函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
 <meta property="og:type" content="article">
 <meta property="og:title" content="异步调用">
 <meta property="og:url" content="http://yoursite.com/2018/08/06/异步调用/index.html">
-<meta property="og:site_name" content="Lu">
-<meta property="og:description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个js函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的js函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://mdn.mozillademos.org/files/8633/promises.png">
-<meta property="og:updated_time" content="2018-08-06T10:29:45.231Z">
+<meta property="og:updated_time" content="2018-08-07T07:10:28.900Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="异步调用">
-<meta name="twitter:description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
+<meta name="twitter:description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个js函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的js函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
 <meta name="twitter:image" content="https://mdn.mozillademos.org/files/8633/promises.png">
   
-    <link rel="alternate" href="/atom.xml" title="Lu" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -40,7 +40,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">Lu</a>
+        <a href="/" id="logo">Hexo</a>
       </h1>
       
     </div>
@@ -88,8 +88,8 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。</p>
-<p>在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于种种原因导致服务器还没有响应我们的请求，但是因为我们采用了异步执行方式，所有包含请求代码的函数中的剩余代码将继续执行。如果我们是将请求结果交由另外一个JS函数去处理的，那么，这个时候就好比两条线程同时执行一样。</p>
+        <p>在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个js函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的js函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。</p>
+<p>在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于种种原因导致服务器还没有响应我们的请求，但是因为我们采用了异步执行方式，所有包含请求代码的函数中的剩余代码将继续执行。如果我们是将请求结果交由另外一个js函数去处理的，那么，这个时候就好比两条线程同时执行一样。</p>
 <a id="more"></a>
 <h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p><code>Ajax(Asynchronous JavaScript and XML)</code> 的核心是JavaScript对象 <code>XmlHttpRequest</code> ，这个对象为向服务器发送请求和解析服务器响应提供了流畅的接口。 <code>XmlHttpRequest</code> 可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();  <span class="comment">//新建一个XMLHttpRequest实例对象</span></span><br><span class="line"><span class="comment">//在通信过程中，每当发生状态变化的时候，就会触发readyStateChange事件，设置回调函数</span></span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//readyState: 0（请求未初始化）、1（服务器连接已建立）、2（请求已接收）、3（请求处理中）、4（请求完成，通信成功）</span></span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">            <span class="comment">//处理服务器发送过来的数据</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//处理错误</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//setRequestHeader方法用于设置HTTP请求的头信息。</span></span><br><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">xhr.responseType = <span class="string">'json'</span>;  <span class="comment">//指定返回的数据类型</span></span><br><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'transfer/http.html'</span>, <span class="literal">true</span>);  <span class="comment">//open方式用于指定HTTP请求方式、请求的地址、是否异步</span></span><br><span class="line">xhr.send();  <span class="comment">//发送HTTP请求，如果是GET，send()方法无参数，或参数为null；如果是POST，send()方法的参数为要发送的数据。</span></span><br></pre></td></tr></table></figure>
@@ -128,7 +128,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/06/异步调用/" data-id="cjkjat1aa000220pebpe0afpp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/异步调用/" data-id="cjkjb9vh90002nopeagyysvaw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -184,6 +184,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2018/08/07/跨域请求/">跨域请求</a>
+          </li>
         
           <li>
             <a href="/2018/08/06/正则表达式/">正则表达式</a>
