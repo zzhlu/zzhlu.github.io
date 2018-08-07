@@ -14,7 +14,7 @@
 <meta property="og:site_name" content="Hello">
 <meta property="og:description" content="超文本传输协议（HyperText Transfer Protocol）是互联网上应用最为广泛的一种网络协议，是一个客户端终端（用户）和服务器端（网站）请求和应答的标准。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-07T07:13:58.866Z">
+<meta property="og:updated_time" content="2018-08-07T09:27:24.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="HTTP协议">
 <meta name="twitter:description" content="超文本传输协议（HyperText Transfer Protocol）是互联网上应用最为广泛的一种网络协议，是一个客户端终端（用户）和服务器端（网站）请求和应答的标准。">
@@ -106,31 +106,31 @@
 </tr>
 <tr>
 <td>Host</td>
-<td>接收请求的服务器的主机名和端口号</td>
+<td>浏览器请求的主机和端口</td>
 </tr>
 <tr>
 <td>Referer</td>
 <td>提供了包含当前请求URI的文档的URL，告诉服务器自己来源</td>
 </tr>
 <tr>
-<td>User—Agent</td>
+<td>User-Agent</td>
 <td>发起请求的客户端应用程序</td>
 </tr>
 <tr>
 <td>Accept</td>
-<td>告诉服务器能够发送那些媒体类型</td>
+<td>告诉服务器能够发送哪些媒体类型</td>
 </tr>
 <tr>
 <td>Accept-Charset</td>
-<td>告诉服务器能够发送那些字符集</td>
+<td>告诉服务器能够发送哪些字符集</td>
 </tr>
 <tr>
 <td>Accept-Encoding</td>
-<td>告诉服务器能够发送那些编码</td>
+<td>告诉服务器能够发送哪些编码</td>
 </tr>
 <tr>
 <td>Accept-Language</td>
-<td>告诉服务器能够发送那些语言</td>
+<td>告诉服务器能够发送哪些语言</td>
 </tr>
 <tr>
 <td>Expect</td>
@@ -176,7 +176,7 @@
 </tr>
 <tr>
 <td>Server</td>
-<td>服务器应用软件名称和版本</td>
+<td>服务器的类型</td>
 </tr>
 <tr>
 <td>Allow</td>
@@ -184,23 +184,23 @@
 </tr>
 <tr>
 <td>Location</td>
-<td>告诉客户端实在在哪里，用于定向</td>
+<td>控制浏览器显示哪个页面</td>
 </tr>
 <tr>
 <td>Content-Base</td>
-<td>解析主体中相对URL的基础URL</td>
+<td>解析服务器中相对URL的基础URL</td>
 </tr>
 <tr>
 <td>Content-Encoding</td>
-<td>主体编码格式</td>
+<td>服务器发送的压缩编码方式</td>
 </tr>
 <tr>
 <td>Content-Language</td>
-<td>解析主体时适用的语言</td>
+<td>服务器发送内容的语言</td>
 </tr>
 <tr>
 <td>Content-Length</td>
-<td>主体的长度或尺寸</td>
+<td>服务器发送的字节码长度</td>
 </tr>
 <tr>
 <td>Content-Location</td>
@@ -208,7 +208,7 @@
 </tr>
 <tr>
 <td>Content-MD5</td>
-<td>主体的MD5校验和</td>
+<td>内容的MD5校验和</td>
 </tr>
 <tr>
 <td>Content-Range</td>
@@ -216,7 +216,7 @@
 </tr>
 <tr>
 <td>Content-Type</td>
-<td>主体的MIME</td>
+<td>服务器发送内容的类型和编码类型</td>
 </tr>
 <tr>
 <td>Cache-Control</td>
@@ -224,7 +224,7 @@
 </tr>
 <tr>
 <td>ETag</td>
-<td>主体的实体标记</td>
+<td>内容的实体标记</td>
 </tr>
 <tr>
 <td>Expires</td>
@@ -232,7 +232,7 @@
 </tr>
 <tr>
 <td>Last-Modified</td>
-<td>实体最后一次修改时间</td>
+<td>服务器最后一次修改的时间</td>
 </tr>
 </tbody>
 </table>
@@ -279,7 +279,7 @@
 <li><code>304 Not Modified</code> 客户端有缓冲的文档并发出了一个条件性的请求（一般是提供If-Modified-Since头表示客户只想比指定日期更新的文档）。服务器告诉客户，原来缓冲的文档还可以继续使用。</li>
 <li><code>400 Bad Request</code> 请求出现语法错误。</li>
 <li><code>403 Forbidden</code> 资源不可用。服务器理解客户的请求，但拒绝处理它。通常由于服务器上文件或目录的权限设置导致。</li>
-<li><code>404 Not Found</code> 无法找到指定位置的资源。</li>
+<li><code>404 Not Found</code> 请求的资源不存在。</li>
 <li><code>500 Internal Server Error</code> 服务器遇到了意料不到的情况，不能完成客户的请求。</li>
 <li><code>501 Not Implemented</code> 服务器不支持实现请求所需要的功能。例如，客户发出了一个服务器不支持的PUT请求。</li>
 <li><code>502 Bad Gateway</code> 服务器作为网关或者代理时，为了完成请求访问下一个服务器，但该服务器返回了非法的应答。</li>
@@ -330,7 +330,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/06/HTTP协议/" data-id="cjkjedmdc0002ospexj7ecgma" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/06/HTTP协议/" data-id="cjkjjn9gu00029gpekliojj8b" class="article-share-link">Share</a>
       
       
     </footer>
