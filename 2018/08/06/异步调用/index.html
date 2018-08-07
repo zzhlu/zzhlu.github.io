@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>异步调用 | Lu</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异步调用">
+<meta property="og:url" content="http://yoursite.com/2018/08/06/异步调用/index.html">
+<meta property="og:site_name" content="Lu">
+<meta property="og:description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/8633/promises.png">
+<meta property="og:updated_time" content="2018-08-06T10:29:45.231Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="异步调用">
+<meta name="twitter:description" content="在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。 在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于">
+<meta name="twitter:image" content="https://mdn.mozillademos.org/files/8633/promises.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Lu" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Lu</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-异步调用" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/06/异步调用/" class="article-date">
+  <time datetime="2018-08-06T02:34:19.304Z" itemprop="datePublished">2018-08-06</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      异步调用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在同步模式下，当我们发送完请求后，后续还有代码需要执行，我们同样将服务器响应交由另一个JS函数去处理，但是这时的代码执行情况是：在服务器没有响应或者处理响应结果的JS函数还没有处理完成return时，包含请求代码的函数的剩余代码是不能够执行的。就好比单线程一样，请求发出后就进入阻塞状态，直到解除阻塞，剩下的代码才会继续执行。</p>
+<p>在异步模式下，当我们发送完请求后，可能还有代码需要执行，这个时候可能由于种种原因导致服务器还没有响应我们的请求，但是因为我们采用了异步执行方式，所有包含请求代码的函数中的剩余代码将继续执行。如果我们是将请求结果交由另外一个JS函数去处理的，那么，这个时候就好比两条线程同时执行一样。</p>
+<a id="more"></a>
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p><code>Ajax(Asynchronous JavaScript and XML)</code> 的核心是JavaScript对象 <code>XmlHttpRequest</code> ，这个对象为向服务器发送请求和解析服务器响应提供了流畅的接口。 <code>XmlHttpRequest</code> 可以使用JavaScript向服务器提出请求并处理响应，而不阻塞用户。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();  <span class="comment">//新建一个XMLHttpRequest实例对象</span></span><br><span class="line"><span class="comment">//在通信过程中，每当发生状态变化的时候，就会触发readyStateChange事件，设置回调函数</span></span><br><span class="line">xhr.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="comment">//readyState: 0（请求未初始化）、1（服务器连接已建立）、2（请求已接收）、3（请求处理中）、4（请求完成，通信成功）</span></span><br><span class="line">    <span class="keyword">if</span>(xhr.readyState === <span class="number">4</span>)&#123;</span><br><span class="line">        <span class="keyword">if</span>(xhr.status === <span class="number">200</span>)&#123;</span><br><span class="line">            <span class="comment">//处理服务器发送过来的数据</span></span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="comment">//处理错误</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//setRequestHeader方法用于设置HTTP请求的头信息。</span></span><br><span class="line">xhr.setRequestHeader(<span class="string">'Content-Type'</span>, <span class="string">'application/x-www-form-urlencoded'</span>);</span><br><span class="line">xhr.responseType = <span class="string">'json'</span>;  <span class="comment">//指定返回的数据类型</span></span><br><span class="line">xhr.open(<span class="string">'GET'</span>, <span class="string">'transfer/http.html'</span>, <span class="literal">true</span>);  <span class="comment">//open方式用于指定HTTP请求方式、请求的地址、是否异步</span></span><br><span class="line">xhr.send();  <span class="comment">//发送HTTP请求，如果是GET，send()方法无参数，或参数为null；如果是POST，send()方法的参数为要发送的数据。</span></span><br></pre></td></tr></table></figure>
+<p>在以下情况使用POST请求：</p>
+<ul>
+<li>无法使用缓存文件（更新服务器上的文件或数据库）。</li>
+<li>向服务器发送大量数据（POST没有数量限制）。</li>
+<li>发送包含未知字符的用户输入时，POST比GET更稳定、更可靠。</li>
+</ul>
+<p>示例：在一个web app中，获取用户的某篇博客的所有跟帖。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getToken</span>(<span class="params">callback</span>)</span>&#123;</span><br><span class="line">  ajaxRequest(<span class="string">'your-host/api/get-token'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res1</span>)</span>&#123;</span><br><span class="line">    callback(res1.data.token);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserByToken</span>(<span class="params">token,callback</span>)</span>&#123;</span><br><span class="line">  ajaxRequest(<span class="string">'your-host/api/get-user?token='</span>+token,<span class="function"><span class="keyword">function</span>(<span class="params">res2</span>)</span>&#123;</span><br><span class="line">    callback(res2.data.userInfo.id);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArticlesByUserId</span>(<span class="params">userId,callback</span>)</span>&#123;</span><br><span class="line">  ajaxRequest(<span class="string">'your-host/api/get-article?userId='</span>+userId,<span class="function"><span class="keyword">function</span>(<span class="params">res3</span>)</span>&#123;</span><br><span class="line">    callback(res3.data[<span class="number">0</span>].id);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCommentsByArtcleId</span>(<span class="params">artcleId,callback</span>)</span>&#123;</span><br><span class="line">  ajaxRequest(<span class="string">'your-host/api/get-comments?artcleId='</span>+artcleId,<span class="function"><span class="keyword">function</span>(<span class="params">res4</span>)</span>&#123;</span><br><span class="line">    callback(res4.data);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getToken(<span class="function"><span class="keyword">function</span>(<span class="params">token</span>)</span>&#123;</span><br><span class="line">    getUserByToken(token,<span class="function"><span class="keyword">function</span>(<span class="params">userId</span>)</span>&#123;</span><br><span class="line">        getArticlesByUserId(userId,<span class="function"><span class="keyword">function</span>(<span class="params">artcleId</span>)</span>&#123;</span><br><span class="line">            getCommentsByArtcleId(artcleId,<span class="function"><span class="keyword">function</span>(<span class="params">comments</span>)</span>&#123;</span><br><span class="line">                <span class="built_in">console</span>.log(comments);</span><br><span class="line">            &#125;);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;...&#125;  <span class="comment">/* executor */</span>  );</span><br></pre></td></tr></table></figure>
+<p>参数 <code>executor</code> 是带有 <code>resolve</code> 和 <code>reject</code> 两个参数的函数。 <code>Promise</code> 构造函数执行时立即调用 <code>executor</code> 函数， <code>resolve</code> 和 <code>reject</code> 两个函数作为参数传递给 <code>executor</code> (executor函数在Promise构造函数返回新建对象前被调用)。 <code>resolve</code> 和 <code>reject</code> 函数被调用时，分别将 <code>promise</code> 的状态改为 <code>fulfilled</code>（完成）或 <code>rejected</code>（失败）。</p>
+<p>一个Promise对象有且仅有三种状态：</p>
+<ul>
+<li><code>pending</code>：初始状态，既不是成功，也不是失败状态。</li>
+<li><code>fulfilled</code>：意味着操作成功完成。</li>
+<li><code>rejected</code>：意味着操作失败。</li>
+</ul>
+<p><code>pending</code> 状态的 <code>Promise</code> 对象可能触发 <code>fulfilled</code> 状态并传递一个值给相应的处理方法，也可能触发失败状态 <code>rejected</code> 并传递失败信息。当其中任一种情况出现时，<code>Promise</code> 对象的 <code>then</code> 方法绑定的处理方法 <code>handlers</code> 就会被调用。<code>then</code> 方法包含两个参数：<code>onfulfilled</code> 和 <code>onrejected</code> ，它们都是 <code>Function</code> 类型。当 <code>Promise</code> 状态为 <code>fulfilled</code> 时，调用 <code>then</code> 的 <code>onfulfilled</code> 方法，当 <code>Promise</code> 状态为 <code>rejected</code> 时，调用 <code>then</code> 方法的 <code>onrejected</code> 方法。<br>　　<br>因为Promise.prototype.then和Promise.prototype.catch方法返回promise对象，所以它们可以被链式调用。<br><img src="https://mdn.mozillademos.org/files/8633/promises.png" alt="avatar"></p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><ul>
+<li><code>Promise.all(iterable)</code> 这个方法返回一个新的promise对象，该promise对象在iterable参数对象里所有的promise对象都成功的时候才会触发成功，一旦有任何一个iterable里面的promise对象失败则立即触发该promise对象的失败。这个新的promise对象在触发成功状态以后，会把一个包含iterable里所有promise返回值的数组作为成功回调的返回值，顺序跟iterable的顺序保持一致；如果这个新的promise对象触发了失败状态，它会把iterable里第一个触发失败的promise对象的错误信息作为它的失败错误信息。Promise.all方法常被用于处理多个promise对象的状态集合。</li>
+<li><code>Promise.race(iterable)</code> 当iterable参数里的任意一个子promise被成功或失败后，父promise马上也会用子promise的成功返回值或失败详情作为参数调用父promise绑定的相应句柄，并返回该promise对象。</li>
+<li><code>Promise.reject(reason)</code> 返回一个状态为失败的Promise对象，并将给定的失败信息传递给对应的处理方法。</li>
+<li><code>Promise.resolve(value)</code> 返回一个状态由给定value决定的Promise对象。如果该值是一个Promise对象，则直接返回该对象；如果该值是thenable(带有then方法的对象)，返回的Promise对象的最终状态由then方法执行决定；否则的话（该value为空，基本类型或者不带then方法的对象），返回的Promise对象状态为fulfilled，并且将该value传递给对应的then方法。通常而言，如果你不知道一个值是否是Promise对象，使用Promise.resolve(value)来返回一个Promise对象，这样就能将该value以Promise对象形式使用。</li>
+</ul>
+<p>第一个示例的实现：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getToken</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">   <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">       ajaxRequest(<span class="string">'your-host/api/get-token'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">res1</span>)</span>&#123;</span><br><span class="line">           resolve(res1.data.token);</span><br><span class="line">       &#125;);</span><br><span class="line">   &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getUserByToken</span>(<span class="params">token</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">        ajaxRequest(<span class="string">'your-host/api/get-user?token='</span>+token,<span class="function"><span class="keyword">function</span>(<span class="params">res2</span>)</span>&#123;</span><br><span class="line">            resolve(res2.data.userInfo.id);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getArticlesByUserId</span>(<span class="params">userId</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">        ajaxRequest(<span class="string">'your-host/api/get-article?userId='</span>+userId,<span class="function"><span class="keyword">function</span>(<span class="params">res3</span>)</span>&#123;</span><br><span class="line">            resolve(res3.data[<span class="number">0</span>].id);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getCommentsByArtcleId</span>(<span class="params">artcleId</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">        ajaxRequest(<span class="string">'your-host/api/get-comments?artcleId='</span>+artcleId,<span class="function"><span class="keyword">function</span>(<span class="params">res4</span>)</span>&#123;</span><br><span class="line">            resolve(res4.data);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">getToken().then(<span class="function"><span class="keyword">function</span>(<span class="params">token</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getUserByToken(token);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">userId</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getArticlesByUserId(userId);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">artcleId</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> getCommentsByArtcleId(artcleId);</span><br><span class="line">&#125;).then(<span class="function"><span class="keyword">function</span>(<span class="params">comments</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(comments);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="Generator"><a href="#Generator" class="headerlink" title="Generator"></a>Generator</h2><p><code>Generator</code> 即生成器，它是生成器函数 <code>Function*</code> 返回的一个对象。生成器函数有两个特征，一是函数名前带星号，二是内部执行语句前有关键字 <code>yield</code> ，调用一个生成器函数并不会马上执行它里面的语句，而是返回一个这个生成器的迭代对象。当这个迭代器的 <code>next()</code> 方法被首次调用时，其内的语句会执行到第一个出现 <code>yield</code> 的位置为止，<code>yield</code> 后紧跟迭代器要返回的值。或者如果用的是 <code>yield*</code> ，则表示将执行权移交给另一个生成器函数（当前执行器暂停执行）。<code>next()</code> 方法返回一个对象，这个对象包含两个属性：<code>value</code> 和 <code>done</code> ，<code>value</code> 属性表示本次 <code>yield</code> 表达式的返回值，<code>done</code> 属性为布尔类型，表示生成器后续是否还有 <code>yield</code> 语句，即生成器函数是否已经执行完毕并返回。调用 <code>next()</code> 方法时，如果传入了参数，那么这个参数会作为上一条执行的 <code>yield</code> 语句的返回值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">genFun</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">yield</span> <span class="string">'initial'</span>;</span><br><span class="line">    <span class="keyword">var</span> anotherVal=<span class="keyword">yield</span> <span class="string">'Hello'</span>;</span><br><span class="line">    <span class="keyword">yield</span> anotherVal;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> gObj=genFun();</span><br><span class="line"><span class="built_in">console</span>.log(gObj.next()); <span class="comment">//执行 yield 'initial'，返回 'initial',&#123;value:'initial',done:false&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(gObj.next()); <span class="comment">//执行 yield 'Hello'，返回 'Hello',&#123;value:'Hello',done:false&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(gObj.next(<span class="string">'World'</span>)); <span class="comment">//将'World'赋给上一条 yield 'Hello'的左值anotherVal，即执行 anotherVal='World'，返回'World',&#123;value:'World',done:false&#125;</span></span><br><span class="line"><span class="built_in">console</span>.log(gObj.next()); <span class="comment">//执行完毕，&#123;value:undefined,done:true&#125;</span></span><br></pre></td></tr></table></figure>
+<p>注意上面的例子中，如果第三个 <code>next()</code> 的调用是在给 <code>anotherVal</code> 赋值，这样执行之后返回的 <code>value</code> 即为传入的参数，如果不传参数，则返回的 <code>value</code> 为 <code>undefined</code> ，且此时的 <code>done</code> 还是 <code>false</code> 。当在生成器函数中显示 <code>return</code> 时，会导致生成器立即变为完成状态，即调用 <code>next()</code> 方法返回的对象的 <code>done</code> 为 <code>true</code> 。如果 <code>return</code> 后面跟了一个值，那么这个值会作为当前调用 <code>next()</code> 方法返回的 <code>value</code> 值。</p>
+<p>第一个示例的实现：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>* <span class="title">myGen</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> token = <span class="keyword">yield</span> getToken();</span><br><span class="line">  <span class="keyword">var</span> userId = <span class="keyword">yield</span> getUserByToken(token);</span><br><span class="line">  <span class="keyword">var</span> articleId = <span class="keyword">yield</span> getArticlesByUserId(userId);</span><br><span class="line">  <span class="keyword">var</span> comments = <span class="keyword">yield</span> getCommentsByArtcleId(articleId);</span><br><span class="line">  <span class="built_in">console</span>.log(comments);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> gen = myGen();</span><br><span class="line">gen.next().value.then(<span class="function"><span class="keyword">function</span>(<span class="params">res1</span>)</span>&#123;</span><br><span class="line">  gen.next(res1).value.then(<span class="function"><span class="keyword">function</span>(<span class="params">res2</span>)</span>&#123;</span><br><span class="line">      gen.next(res2).value.then(<span class="function"><span class="keyword">function</span>(<span class="params">res3</span>)</span>&#123;</span><br><span class="line">        gen.next(res3).value.then(<span class="function"><span class="keyword">function</span>(<span class="params">res4</span>)</span>&#123;</span><br><span class="line">            gen.next(res4);</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'executing done'</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">      &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<h2 id="async-await"><a href="#async-await" class="headerlink" title="async/await"></a>async/await</h2><p>当一个 <code>async</code> 函数被调用时，它返回一个 <code>Promise</code> 对象。当 <code>async</code> 函数返回一个值时，<code>Promise</code> 将用返回的值 <code>resolved</code> 。当 <code>async</code> 函数抛出异常或某个值时，<code>Promise</code> 将被抛出的值 <code>rejected</code> 。<code>async</code> 函数可以包含 <code>await</code> 表达式，带有 <code>await</code> 的语句会暂停 <code>async</code> 函数的执行并等待传递的 <code>Promise</code> 的解析，然后再恢复 <code>async</code> 函数的执行并返回解析后的值。<code>async/await</code> 函数的目的是简化同步使用 <code>Promise</code> 的行为，并对一组 <code>Promise</code> 执行某些行为，就像 <code>Promise</code> 类似于结构化回调一样，<code>async/await</code> 相当于 <code>Generator</code> 和 <code>Promise</code> 的集合体。</p>
+<p>第一个示例的实现：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">function</span> <span class="title">getComments</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="keyword">var</span> token = <span class="keyword">await</span> getToken();</span><br><span class="line">  <span class="keyword">var</span> userId = <span class="keyword">await</span> getUserByToken(token);</span><br><span class="line">  <span class="keyword">var</span> articleId = <span class="keyword">await</span> getArticlesByUserId(userId);</span><br><span class="line">  <span class="keyword">var</span> comments = <span class="keyword">await</span> getCommentsByArtcleId(articleId);</span><br><span class="line">  <span class="built_in">console</span>.log(comments);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>代码风格跟 <code>Generator</code> 函数基本一样，只是把星号去掉，前面加了 <code>async</code> ，函数体内语句中把 <code>yield</code> 换成了 <code>await</code> ；但是调用执行函数时则完全不一样了，<code>Generator</code> 函数需要额外定义执行函数器，通过不断调用 <code>next()</code> 来完成调用获取结果，而 <code>async</code> 函数自带执行函数器，只要调用函数即会执行。</p>
+<p>总结：首先通过最传统的 <code>ajax</code> 方式异步调用和回调函数处理；然后加入 <code>Promise</code> 对象，通过链式调用使代码编写更加有条理性；之后又引入了新的异步编程解决方案 <code>Generator</code> ，其函数内部的编码方式与同步写法及其类似，只是 <code>Generator</code> 的执行权交由了另外一个函数，其执行方式仍然需要不断的调用 <code>next()</code> 而略显繁琐；最后引入了ES2017新标准中收录的新函数 <code>async</code> ，通过与 <code>await</code> 相结合，使其异步调用的编码实现基本跟同步编码相差无几，且非常易于理解和提高了代码的维护性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/06/异步调用/" data-id="cjkj29uc20000a4pe9ygkzdo9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2018/08/06/正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          正则表达式
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/08/06/HTTP协议/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">HTTP协议</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/06/正则表达式/">正则表达式</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/异步调用/">异步调用</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/HTTP协议/">HTTP协议</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/CSS3动画/">CSS3动画</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ZhaoLu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
