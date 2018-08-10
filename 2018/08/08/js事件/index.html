@@ -7,17 +7,17 @@
   
   <title>js事件 | Hello</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="事件流分三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。IE没有事件捕获阶段。 事件冒泡：事件从目标元素从下往上进行传播。如果点击了页面的 div 元素，则 click 事件的传播顺序如下：div -&amp;gt; body -&amp;gt; html -&amp;gt; document。click 事件首先在 div 元素上发生，这个元素就是我们的目标元素，然后 click 事件沿着 DOM 树向上传播，一直">
+  <meta name="description" content="事件流分三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。IE没有事件捕获阶段。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js事件">
 <meta property="og:url" content="http://yoursite.com/2018/08/08/js事件/index.html">
 <meta property="og:site_name" content="Hello">
-<meta property="og:description" content="事件流分三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。IE没有事件捕获阶段。 事件冒泡：事件从目标元素从下往上进行传播。如果点击了页面的 div 元素，则 click 事件的传播顺序如下：div -&amp;gt; body -&amp;gt; html -&amp;gt; document。click 事件首先在 div 元素上发生，这个元素就是我们的目标元素，然后 click 事件沿着 DOM 树向上传播，一直">
+<meta property="og:description" content="事件流分三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。IE没有事件捕获阶段。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-08-10T02:00:20.766Z">
+<meta property="og:updated_time" content="2018-08-10T02:02:36.305Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js事件">
-<meta name="twitter:description" content="事件流分三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。IE没有事件捕获阶段。 事件冒泡：事件从目标元素从下往上进行传播。如果点击了页面的 div 元素，则 click 事件的传播顺序如下：div -&amp;gt; body -&amp;gt; html -&amp;gt; document。click 事件首先在 div 元素上发生，这个元素就是我们的目标元素，然后 click 事件沿着 DOM 树向上传播，一直">
+<meta name="twitter:description" content="事件流分三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。IE没有事件捕获阶段。">
   
     <link rel="alternate" href="/atom.xml" title="Hello" type="application/atom+xml">
   
@@ -87,10 +87,10 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>事件流分三个阶段：事件捕获阶段、处于目标阶段、事件冒泡阶段。IE没有事件捕获阶段。</p>
+<a id="more"></a>
 <p>事件冒泡：事件从目标元素从下往上进行传播。如果点击了页面的 <code>div</code> 元素，则 <code>click</code> 事件的传播顺序如下：<code>div -&gt; body -&gt; html -&gt; document</code>。<code>click</code> 事件首先在 <code>div</code> 元素上发生，这个元素就是我们的目标元素，然后 <code>click</code> 事件沿着 <code>DOM</code> 树向上传播，一直到 <code>document</code> 对象。</p>
 <p>事件捕获：与事件冒泡相反，从 <code>document</code> 对象一直向下传播直到目标元素。<code>document -&gt; html -&gt; body -&gt; div</code> 。</p>
 <p>事件捕获只是IE9及以上、现代浏览器支持的事件流模型，事件冒泡所有浏览器都支持，建议多使用事件冒泡，在有特殊情况下使用事件捕获。</p>
-<a id="more"></a>
 <h2 id="添加事件和移除事件"><a href="#添加事件和移除事件" class="headerlink" title="添加事件和移除事件"></a>添加事件和移除事件</h2><p><code>addEventListener(eventType, handler, boolean)</code> 添加事件方法。<code>removeEventListener(eventType, handler, boolean)</code> 移除事件方法。<code>eventType</code> 指要添加的事件类型，<code>click</code> 、<code>blur</code> 等；<code>handler</code> 指事件触发时处理的方法；<code>boolean</code> 表示是否在捕获阶段处理事件，<code>true</code> 表示在捕获阶段处理事件，<code>false</code> 表示在冒泡阶段处理事件，通常为 <code>false</code> 。</p>
 <p>第一种方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">'myDiv'</span>);</span><br><span class="line">div.addEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">'add click event!'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">div.removeEventListener(<span class="string">'click'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    <span class="comment">//这种移除事件的方式是无效的</span></span><br><span class="line">  alert(<span class="string">'remove click event!'</span>);</span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
 <p>第二种方法：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">'myDiv'</span>);</span><br><span class="line">div.addEventListener(<span class="string">'click'</span>, addHandler, <span class="literal">false</span>);   <span class="comment">//建议使用这种方式添加事件，目的就是为了能够随时移除事件</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">'add click event!'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">div.removeEventListener(<span class="string">'click'</span>, removeHandler, <span class="literal">false</span>);   <span class="comment">//这种移除事件的方式才是有效的</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">removeHandler</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  alert(<span class="string">'remove click event!'</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -147,7 +147,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/08/08/js事件/" data-id="cjknchhxg0000dgpen11w45tz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2018/08/08/js事件/" data-id="cjknci9po0000d4pehlq3pdl2" class="article-share-link">Share</a>
       
       
     </footer>
