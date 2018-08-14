@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>BOM | Hello</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="BOM(Browser Object Model) 指浏览器对象模型，由多个对象组成，其中代表浏览器窗口的 Window 对象是 BOM 的顶层对象，其它对象都是该对象的子对象。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BOM">
+<meta property="og:url" content="http://yoursite.com/2018/08/14/BOM/index.html">
+<meta property="og:site_name" content="Hello">
+<meta property="og:description" content="BOM(Browser Object Model) 指浏览器对象模型，由多个对象组成，其中代表浏览器窗口的 Window 对象是 BOM 的顶层对象，其它对象都是该对象的子对象。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-08-14T08:54:13.413Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BOM">
+<meta name="twitter:description" content="BOM(Browser Object Model) 指浏览器对象模型，由多个对象组成，其中代表浏览器窗口的 Window 对象是 BOM 的顶层对象，其它对象都是该对象的子对象。">
+  
+    <link rel="alternate" href="/atom.xml" title="Hello" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hello</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-BOM" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2018/08/14/BOM/" class="article-date">
+  <time datetime="2018-08-14T06:15:28.531Z" itemprop="datePublished">2018-08-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      BOM
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><code>BOM(Browser Object Model)</code> 指浏览器对象模型，由多个对象组成，其中代表浏览器窗口的 <code>Window</code> 对象是 <code>BOM</code> 的顶层对象，其它对象都是该对象的子对象。</p>
+<a id="more"></a>
+<h3 id="window-对象"><a href="#window-对象" class="headerlink" title="window 对象"></a>window 对象</h3><p><code>window</code> 对象是 <code>BOM</code> 的核心对象，代表浏览器的一个实例。</p>
+<p>定义全局变量与在 <code>window</code> 对象上直接定义属性的区别：全局变量不能通过 <code>delete</code> 操作符删除，而直接在 <code>window</code> 对象上定义的属性可以。</p>
+<p><code>window</code> 对象包含以下通用对象：<code>document</code> 、 <code>frames</code> 、 <code>history</code> 、 <code>location</code> 、 <code>navigator</code> 、 <code>screen</code> 。</p>
+<h3 id="location-对象"><a href="#location-对象" class="headerlink" title="location 对象"></a>location 对象</h3><p><code>location</code> 对象提供了与当前窗口中加载文档有关的信息及一些导航功能。<code>location</code> 对象既是 <code>window</code> 对象的属性，也是 <code>document</code> 对象的属性，<code>window.location</code> 与 <code>document.location</code> 引用的是同一个对象。</p>
+<p><code>location</code> 对象的属性：</p>
+<ul>
+<li><code>hash</code> URL中的hash，返回 # 号后面的字符串。</li>
+<li><code>host</code> 返回服务器名称和端口号。</li>
+<li><code>hostname</code> 返回服务器名称，不带端口号。</li>
+<li><code>href</code> 返回当前页面完整的URL。</li>
+<li><code>pathname</code> 返回URL中的目录和文件名。例如 /project/test.html 。</li>
+<li><code>port</code> 返回URL中指定的端口号，如果URL中不包含端口号则返回空字符串。</li>
+<li><code>protocol</code> 返回页面使用的协议，http或https。</li>
+<li><code>search</code> 查询字符串，返回 ? 号后面的所有值。</li>
+</ul>
+<h3 id="navigator-对象"><a href="#navigator-对象" class="headerlink" title="navigator 对象"></a>navigator 对象</h3><p><code>navigator</code> 对象包含了浏览器的元信息，其中最常用的是 <code>userAgent</code> 、 <code>language</code> 属性。<code>userAgent</code> 属性记录了浏览器当前的硬件平台、操作系统、渲染引擎、浏览器版本等信息。在客户端，js脚本也可以使用 <code>userAgent</code> 来进行一些特性检测，针对不同环境提供不同的解决方案。现代浏览器中，<code>navigator</code> 对象还提供了 <code>geolocation</code> 、 <code>onLine</code> 、 <code>getBatery</code> 等特性，以供用户判断地址位置、在线状态和电池用量等信息。</p>
+<h3 id="history-对象"><a href="#history-对象" class="headerlink" title="history 对象"></a>history 对象</h3><p><code>history</code> 对象用于保存用户上网记录。使用 <code>go()</code> 方法可以切换用户访问历史，<code>back()</code> 和 <code>forward()</code> 可以代替 <code>go()</code> ，<code>back()</code> 返回上一页，<code>forward()</code> 返回下一页。H5规范提供了 <code>pushState</code> 、 <code>replaceState</code> 等方法，可以让浏览器不用刷新页面即可改变历史纪录，通过监听 <code>state</code> 状态值，可以实现无缝内容刷新。</p>
+<h3 id="screen-对象"><a href="#screen-对象" class="headerlink" title="screen 对象"></a>screen 对象</h3><p><code>screen</code> 对象中保存着与客户端显示器有关的信息，这些信息一般只用于站点分析。<code>width</code> 属性获取整个屏幕的宽，<code>height</code> 属性获取整个屏幕的高。</p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><ul>
+<li><code>alert(&quot;提示信息&quot;)</code></li>
+<li><code>confirm(&quot;确认信息&quot;)</code></li>
+<li><code>prompt(&quot;弹出输入框&quot;)</code></li>
+<li><code>open(&quot;url地址&quot;, &quot;_black或_self&quot;, &quot;新窗口的大小&quot;）</code></li>
+<li><code>close()</code> 关闭当前的网页。</li>
+<li><code>setTimeout(函数, 时间) / clearTimeout(定时器名称)</code> 定时器，只执行一次 / 清除定时器。</li>
+<li><code>setInterval(函数, 时间) / clearInterval(定时器名称)</code> 定时器，无限执行 / 清除定时器。</li>
+<li><code>encodeURI / encodeURIComponent</code> 转码整个URL（不包括元字符和语义字符） / 转码URL的组成部分（不包括语义字符）。</li>
+<li><code>decodeURI / decodeURIComponent</code> 整个URL解码 / URL片段解码。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2018/08/14/BOM/" data-id="cjkth33o80000k4perri4lpyl" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2018/08/13/Flex布局/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Flex布局</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/08/">八月 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2018/08/14/BOM/">BOM</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/13/Flex布局/">Flex布局</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/08/js事件/">js事件</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/07/跨域请求/">跨域请求</a>
+          </li>
+        
+          <li>
+            <a href="/2018/08/06/正则表达式/">正则表达式</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2018 ZhaoLu<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>
